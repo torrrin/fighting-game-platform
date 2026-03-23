@@ -1,9 +1,11 @@
 # 指定 CMake 最低版本
 cmake_minimum_required(VERSION 3.15)
 
-# 添加静态库
+# 添加静态库，列出所有源文件
 add_library(platform_core STATIC
-    # 源文件暂时为空，后续添加 .cpp 文件时再填入
+    src/platform/game_registry.cpp
+    src/platform/rollback_engine.cpp   # ← 新增
+    src/games/fighting_game.cpp
 )
 
 # 指定头文件目录
