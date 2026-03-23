@@ -76,6 +76,9 @@ namespace platform
         // 参数 state: 要验证的状态
         // 返回值: true 表示状态有效，false 表示状态损坏或作弊
         virtual bool validateState(const GameState &state) const = 0;
+
+        // ----- 调试 -----
+        virtual void debugPrint() const {}
     };
 
 } // namespace platform
