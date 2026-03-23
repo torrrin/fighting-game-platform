@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighting Game Platform - 格斗游戏平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 格斗游戏平台</h1>
+        <p class="subtitle">基于 Rollback Netcode 的多人对战平台</p>
+        
+        <div class="game-area">
+            <canvas id="game-canvas" width="800" height="400"></canvas>
+            
+            <div class="ui-overlay">
+                <div class="health-bars">
+                    <div class="health-bar-container">
+                        <div class="health-bar-label">玩家1</div>
+                        <div class="health-bar-bg">
+                            <div class="health-bar-fill" id="health1-fill"></div>
+                        </div>
+                    </div>
+                    <div class="health-bar-container">
+                        <div class="health-bar-label">玩家2</div>
+                        <div class="health-bar-bg">
+                            <div class="health-bar-fill" id="health2-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-panel">
+                    <div class="info-item">
+                        <span class="info-label">帧数:</span>
+                        <span class="info-value" id="frame-count">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">回滚次数:</span>
+                        <span class="info-value" id="rollback-count">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">FPS:</span>
+                        <span class="info-value" id="fps">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3>玩家1 控制</h3>
+                <p>← → : 移动 | A : 攻击 | S : 防御</p>
+            </div>
+            <div class="control-group">
+                <h3>玩家2 控制</h3>
+                <p>← → : 移动 | K : 攻击 | L : 防御</p>
+            </div>
+        </div>
+        
+        <div class="status" id="status">
+            加载中...
+        </div>
+    </div>
+    
+    <!-- 直接加载 WASM 胶水代码（它会创建全局 Module） -->
+    <script src="game_wasm.js"></script>
+    
+    <!-- 加载应用代码 -->
+    <script src="src/main.js"></script>
+</body>
+</html>

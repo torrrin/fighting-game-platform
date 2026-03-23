@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WASM Test</title>
+</head>
+<body>
+    <h1>WASM 加载测试</h1>
+    <div id="status">加载中...</div>
+    
+    <script src="game_wasm.js"></script>
+    <script>
+        console.log('Script loaded');
+        console.log('typeof createGameModule:', typeof createGameModule);
+        
+        if (typeof createGameModule === 'function') {
+            document.getElementById('status').textContent = 'createGameModule 存在，正在初始化...';
+            
+            createGameModule().then(Module => {
+                console.log('Module:', Module);
+                document.getElementById('status').textContent = 'WASM 加载成功！';
+                
+                // 测试导出函数
+                if (Module._game_create) {
+                    const ptr = Module._game_create();
+                    console.log('Engine created:', ptr);
+                    document.getElementById('status').textContent = '游戏引擎创建成功！';
+                }
+            }).catch(err => {
+                console.error('Failed:', err);
+                document.getElementById('status').textContent = '失败: ' + err.message;
+            });
+        } else {
+            document.getElementById('status').textContent = 'createGameModule 不存在！';
+            console.error('createGameModule is undefined');
+            console.log('window keys:', Object.keys(window));
+        }
+    </script>
+</body>
+</html>
